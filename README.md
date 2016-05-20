@@ -1,3 +1,5 @@
 # 42thinkers-mineclone
 
-Dies wird ein Minessweeper von der Gruppe 42Thinkers aus der HS Rosenheim
+Dies wird ein Minesweeper von der Gruppe 42Thinkers aus der HS Rosenheim 
+noch in der Entwicklungsphase!!
+
