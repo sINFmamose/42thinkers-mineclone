@@ -9,8 +9,8 @@ public class Dimension
 public class Level {
 
     final static int Bomben = 20;
-    int hoehe = 10;
-    int breite = 10;
+    final static int hoehe = 10;
+    final static int breite = 10;
 
     protected int [][] level1 = new int [9][9];
     {
