@@ -11,13 +11,6 @@ public class Algorithmen
         Random rand = new Random();
 
         minenLand = new int[Level.breite][Level.hoehe]; // minenland wird durch die Dimensionen  des Lvls bestimmt
-        for (int i = 0 ; i< Level.breite; i++)
-        {
-            for (int j = 0; j< Level.hoehe; j++)
-            {
-                minenLand[i][j] = 0 ;
-            }
-        }
 
         int zähler = 0;
         int xPunkt;
