@@ -1,0 +1,8 @@
+Hier können wir über Ideen etc diskutiern , vielleicht hat ja jemand ne Lösung, wo ein anderer hängt.
+
+Spielgui können wir zb so machen in 3 Abschnitte :
+
+oben :   Header gibt an welches Lvl , wieviele Bomben und die Dimensionen.
+mitte:  verschiedene Buttens zb für speichern, exit, Flags und Timer
+unten: Ein dynamisch erstelltes Arrayabbild in 2 layern mit den eigentlichen Spezifikationen des Arrays gezeichnet 
+(Achtung UNTERSCHIED zum Header ) - Einige Objekte werden als invisible deklariert (dient zum Lvlzeichen)
