@@ -1,12 +1,15 @@
 import java.util.Random;
 
+
 /**
  * Created by perdu on 20.05.16.
  */
 public class Algorithmen
 {
 
-    private void PlaziereBomben (int breite,int hoehe)
+
+
+    private void PlaziereBomben (int x ,int y )
     {
         Random rand = new Random();
 
@@ -18,13 +21,16 @@ public class Algorithmen
         while(zähler<Level.Bomben){ //performanter als die andere Lösung
             xPunkt = rand.nextInt(Level.breite);
             yPunkt = rand.nextInt(Level.hoehe);
-            if ((minenLand[xPunkt][yPunkt] != 10) &!=22) // da passt noch was nicht! Abfrage ob keine 10 oder keine 22
-            {
-                minenLand[xPunkt][yPunkt]= 10; // 10 ist eine Bombe
-                zähler++;
-
+            if ((minenLand[xPunkt][yPunkt] != 10)) {
+                    if (minenland[xPunkt][yPunkt]!=22)
+                    {
+                        minenLand[xPunkt][yPunkt] = 10; // 10 ist eine Bombe
+                        zähler++;
+                    }
             }
         }
+
+
        //Minenzähler im Umfeld
         for (int i = 0; i < Level.breite; i++) {
             for (int j = 0; j < Level.hoehe; j++) {
