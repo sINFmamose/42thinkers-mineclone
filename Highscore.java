@@ -4,7 +4,7 @@ import java.io.*;
 /**
  * Created by perdu on 05.06.16.
  */
-public class Highscore {
+public class Highscore extends JFrame {
 
     private JPanel panel1;
 
@@ -12,7 +12,8 @@ public class Highscore {
             Reader reader = null;
 
             try {
-                reader = new FileReader("bin/highscore.txt");
+                System.getProperty("file.separator");
+                reader = new FileReader("bin.highscore.txt");
 
                 while ( reader.ready() ) {
                     System.out.println(reader.read());

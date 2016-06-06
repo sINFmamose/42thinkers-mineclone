@@ -3,7 +3,7 @@ import javax.swing.*;
 /**
  * Created by nt-user1 on 24.05.2016.
  */
-public class Hauptmenue {
+public class Hauptmenue extends JFrame {
     private JTextField hauptmenuTextField;
     private JButton creditsButton;
     private JButton spielBeendenButton;
