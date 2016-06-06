@@ -1,5 +1,9 @@
+import javax.swing.*;
+
+
 public class Level {
 
+    private JTable table1;
 
 
 
