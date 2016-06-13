@@ -1,0 +1,9 @@
+//der Text für das Tutorial. erstmal nur ein Rohentwurf... lg Markus//
+Tutorial für den Mine_Clone:
+
+Ziel des Spieles ist es, genau wie beim Spiele-Klassiker"Mine Sweeper",  das Minenfeld aufzudecken, ohne eine Minen auszulösen, und alle Minen zu markieren.
+Die Zahl in einem Feld gibt an, wie viele Minen sich in den angrenzenden Feldern befinden, sodass eine Lösung des Rätsels mit etwas Glück möglich ist.
+Stueuerung:
+linke Maustaste: Feld aufdecken
+rechte Maustaste: Feld als mine Markieren.
+Hinweis ür Highscore-Jäger: Das Spiel geht auf Zeit.
