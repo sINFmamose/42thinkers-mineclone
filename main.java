@@ -20,7 +20,7 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Hauptmenue.form"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Hauptmenue.fxml"));
         Parent view = (Parent) fxmlLoader.load();
         Controller controller = fxmlLoader.<Controller>getController();
         controller.setStage(primaryStage);
