@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+
 /**
  * Created by perdu on 10.06.16.
  */
@@ -28,6 +29,11 @@ public class Welt  {
     private BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
 
 
+    private long startTime = 0;         // wird für timer benötigt
+    private long endTime = 0;
+    private long duration = 0;
+
+
     public Welt() {
         { // intitialisierung
             random = new Random();    // neues Random
@@ -36,15 +42,17 @@ public class Welt  {
             for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
                 for (int y = 0; y < height; y++) {
                     level[x][y] = new Level(x, y, normal, bomb, pressed, flag,eins,zwei,drei,vier,fuenf,sechs,sieben,acht); // jedes tile soll ein neues Tile sein mit .. x/y koordinate
-                    // und obs normal ist oder bombe,pressed oder flag
+                    // und obs normal ist oder bombe,pressed oder flag oder ne zahl
                     level[x][y].setNormal(normal);      // automatisch auf normal gezeichnet
                 }
             }
             placeBombs(); //Aufruf von placebombs welches die methode placebomb aufruft
             setNumbers();
+            getStartTime();
         }
         reset();
     }
+
     private void placeBombs() {
         for (int i = 0; i < AmountOfBombs; i++) {
             placeBomb();
@@ -90,7 +98,7 @@ public class Welt  {
     public void clickedLeft(int x, int y) {
         {
 
-            if (!dead && !finish) {
+             if (!dead && !finish) {
 
                 int tileX = x / Level.getWidth();      // Welche Kachelposi
                 int tileY = y / Level.getHeight();
@@ -148,7 +156,7 @@ public class Welt  {
     }
 
     private void checkFinish() {
-        outer:
+        outer:              // Sprungmarke
         for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
             for (int y = 0; y < height; y++) {
                 if (!(level[x][y].isOpened() || level[x][y].isBomb() && level[x][y].isFlag())) {
@@ -167,10 +175,12 @@ public class Welt  {
         }
         if (dead) {
             g.setColor(Color.red);
-            g.drawString("you loose", 200, 300);
+            g.drawString("you loose\n", 200, 300);
+            g.drawString("Zeit:"+getDuration(),200,400);
         } else if (finish) {
             g.setColor(Color.red);
-            g.drawString("you won", 200, 300);
+            g.drawString("you won\n", 200, 300);
+            g.drawString("Zeit:"+getDuration(),200,400);
         }
     }
     public void reset()
@@ -188,7 +198,25 @@ public class Welt  {
 
         placeBombs();
         setNumbers();
+        getStartTime();
     }
+    public final long getDuration() {          // Timermethode
+        long start = getStartTime();
+        long ende = getEndTime();
+        long duration =  ((ende - start)/1000);
+        return duration;
+    }
+    public long getStartTime() {
+        startTime = System.nanoTime();
+        return startTime;
+    }
+    public long getEndTime() {
+        long endTime = System.nanoTime();
+        return endTime;
+    }
+
+
+
 
     public static int getWidth() {
         return width;

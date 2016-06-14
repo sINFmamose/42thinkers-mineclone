@@ -53,7 +53,6 @@ public class Level {
         this.siebenImage =sieben;
         this.achtImage=acht;
 
-
         //opened = true;
     }
 
@@ -97,6 +96,7 @@ public class Level {
         flag = false;
         bomb = false;
         opened = false;
+
     }
 
     public boolean isFlag() {
