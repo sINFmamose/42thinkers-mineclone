@@ -1,61 +1,121 @@
-import java.util.Random;
 
 
-/**
- * Created by perdu on 20.05.16.
- */
-public class Algorithmen
-{
-int derzeitigesLevel =0;  // immo nur ein helper
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class Algorithmen extends JFrame implements MouseListener,KeyListener  {     //Fenster und Screen // mit Mouselistener
+    private  static int width =500; //breite 500  statisch festgelegt
+    private static int height = 500; // höhe mit 500 statisch festgelegt
+    private Screen screen;  // Intitialisierung des screens
+    private Welt welt;  // Intialisierung einer neuen Welt
+    private Font font;
+    private int insetLeft; // wegen den rändern klickt man ansonsten nicht richtig
+    private int insetTop;
+    private int counter;
 
 
-    private void PlaziereBomben (int x ,int y )
-    {
-        Random rand = new Random();
-        int b;
-        int c;
-        int d;
-        b = Level.breite[derzeitigesLevel];
-        c = Level.hoehe[derzeitigesLevel];
-        d = Level.Bomben[derzeitigesLevel];
+    public Algorithmen (){
+        super("Minesweeper"); //(Titelzeile)
+        welt = new Welt() ;// neue Welt erzeugen
+        setResizable(false); //Nicht veränderbar in der Grösse
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //Beenden beim X im rechten oberen eck
+        addMouseListener(this); //  damit der Mouselistener überhaupt auf das Feld hört // Implementierung
+        addKeyListener(this);
+        screen = new Screen() ;  // Aufruf neuer Screen
+        add(screen);  // füge Screen in das Frame hinzu
+        pack(); //Die Methode  pack() bewirkt, dass das Frame die minimale Grösse bei optimaler Anordnung der in ihm enthaltenen Komponenten bekommt.
+        insetLeft = getInsets().left;
+        insetTop= getInsets().top;
+        //System.out.println(getInsets().left); //Insets (rand) des feldes
+        setSize(width+insetLeft+getInsets().right,height+insetTop+getInsets().bottom); //grösse des Fensters + Die Ränder links und rechts bzw oben und unten
+        setLocationRelativeTo(null); // in welcher relation die Location steht
+        setVisible(true); // Fenster soll sichtbar sein
+        font=new Font("SansSerif",0,50);    // Mit welcher Schriftart gezeichnet wird ( nicht fett und grösse soll 12 sein)
 
-         int [][]minenLand = new int[b][c]; // minenland wird durch die Dimensionen  des Lvls bestimmt
+    }
 
-        int zähler = 0;
-        int xPunkt;
-        int yPunkt;
-        while(zähler<d){ //performanter als die andere Lösung
-            xPunkt = rand.nextInt(b);
-            yPunkt = rand.nextInt(c);
-            if ((minenLand[xPunkt][yPunkt] != 10)) {
-                    if (minenLand[xPunkt][yPunkt]!=22)
-                    {
-                        minenLand[xPunkt][yPunkt] = 10; // 10 ist eine Bombe
-                        zähler++;
-                    }
-            }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) { // wenn die maus losgelassen haben nach klick
+        counter =  e.getClickCount() ;
+        if(e.getButton()==1) welt.clickedLeft(e.getX()-insetLeft,e.getY()-insetTop);// wo geklickt wurde diese koords werden übergeben
+        if(e.getButton() == 3) welt.clickedRight(e.getX() - insetLeft, e.getY() - insetTop);
+
+        screen.repaint();  // der Screen soll neu gemalt werden
+
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            welt.reset();
+            screen.repaint();
         }
 
+    }
 
-       //Minenzähler im Umfeld
-        for (int i = 0; i < b; i++) {
-            for (int j = 0; j < c; j++) {
-                if (minenLand[i][j]==10 ) {            //  Abfrage ob Mine da ist
-                    for (int k = -1; k <= 1 ; k++) {
-                        for (int l = -1; l <= 1; l++) {
 
-                            try {
-                                if (minenLand[i+k][j+l]!=-1) {
-                                    minenLand[i+k][j+l] += 1;
-                                }
-                            }
-                            catch (Exception e) {
-                                // Do nothing
-                            }
-                        }
-                    }
-                }
-            }
+
+    public class Screen extends JPanel{ // innere Klasse erbt von Jpanel
+        @Override
+        public void paintComponent (Graphics g){ //damit wird das panel repainet
+
+            g.setFont(font);
+            welt.draw (g); // neue welt wird gezeichnet
+            // g.setColor(Color.red); // Farbe auf rot setzen
+            // g.fillRect(0,0,50,50); // rechteck reinmalen
         }
+    }
+
+
+    public static int getScreenWidth() { // ansonsten müsste man die Methode overriden  So kann mann die breite returnen ohne override
+        return width;
+    }
+
+
+    public static int getScreenHeight() {
+        return height;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }
