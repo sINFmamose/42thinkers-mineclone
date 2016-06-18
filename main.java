@@ -5,22 +5,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.event.ActionListener;
+
+
 /**
- * Created by perdu on 20.05.16.
+ * Created by ${perdu} on ${16.06.16}.
  */
-public class main extends Application {
+public class main extends Application implements ActionListener {
+
+
 
     public static void main(String[] args) {
 
-        Algorithmen algorithmen = new Algorithmen();
 
+        Algorithmen algorithmen = new Algorithmen();
+        //Startbildschirm startbildschirm = new Startbildschirm();
         // Hauptmenue hauptmenue = new Hauptmenue();
+
+        EventQueue.invokeLater(() -> {          //mit ner Lambda-expression ersetzt
+            Uhr clock = new Uhr();
+            clock.start();
+
+        });
     }
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Hauptmenue.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Startbildschirm.fxml"));
         Parent view = (Parent) fxmlLoader.load();
         Controller controller = fxmlLoader.<Controller>getController();
         controller.setStage(primaryStage);
@@ -28,6 +41,11 @@ public class main extends Application {
         primaryStage.setTitle("Algorithmen");
         primaryStage.setScene(new Scene(view));
         primaryStage.show();
+    }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
     }
 
     public class Controller {

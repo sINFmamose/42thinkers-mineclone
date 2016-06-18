@@ -2,7 +2,7 @@
 import javax.swing.*;
 import java.io.*;
 /**
- * Created by perdu on 05.06.16.
+ * Created by ${perdu} on ${16.06.16}.
  */
 public class Highscore extends JFrame {
 
@@ -22,6 +22,7 @@ public class Highscore extends JFrame {
                 System.err.println("Fehler beim Lesen der Datei!");
             } finally {
                 try {
+                    assert reader != null;
                     reader.close();
                 } catch (Exception e) {
                     e.printStackTrace();

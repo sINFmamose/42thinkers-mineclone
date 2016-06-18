@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- * Created by nt-user1 on 24.05.2016.
+ * Created by ${perdu} on ${16.06.16}.
  */
 public class Tutorial extends JFrame {
     private JPanel panel1;

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Created by perdu on 10.06.16.
+ * Created by ${perdu} on ${16.06.16}.
  */
 public class Imageloader {
 

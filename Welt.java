@@ -4,57 +4,56 @@ import java.util.Random;
 
 
 /**
- * Created by perdu on 10.06.16.
+ * Created by ${perdu} on ${16.06.16}.
  */
-public class Welt  {
-    private static int width = 20; // Wieviele Kacheln in X richtung
-    private static int height = 20;// wieviele Kacheln in y-richtung
-    private final int AmountOfBombs = 40; // Bomben
+public class Welt {
+    private static final int width = 20; // Wieviele Kacheln in X richtung
+    private static final int height = 20;// wieviele Kacheln in y-richtung
     private boolean finish;
     private boolean dead;
-    private Random random;      // Initialisierung eines neuen Random objekts
-    private Level[][] level; // 2 dim level array
-    private int clicks = 0;
-    private BufferedImage bomb = Imageloader.scale(Imageloader.loadImage("pics/bombe.jpg"), Level.getWidth(), Level.getHeight());     // besser hier die images laden als in jeder kachel einzeln
-    private BufferedImage flag = Imageloader.scale(Imageloader.loadImage("pics/Flaggenfeld.jpg"), Level.getWidth(), Level.getHeight()); //Scalliertes laden
-    private BufferedImage normal = Imageloader.scale(Imageloader.loadImage("pics/Feld.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage pressed = Imageloader.scale(Imageloader.loadImage("pics/gedrueckt.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage eins = Imageloader.scale(Imageloader.loadImage("pics/1.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage zwei = Imageloader.scale(Imageloader.loadImage("pics/2.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage drei = Imageloader.scale(Imageloader.loadImage("pics/3.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage vier = Imageloader.scale(Imageloader.loadImage("pics/4.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage fuenf = Imageloader.scale(Imageloader.loadImage("pics/5.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage sechs = Imageloader.scale(Imageloader.loadImage("pics/6.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage sieben = Imageloader.scale(Imageloader.loadImage("pics/7.jpg"), Level.getWidth(), Level.getHeight());
-    private BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
+    private final Random random;      // Initialisierung eines neuen Random objekts
+    private final Level[][] level; // 2 dim level array
+   // private int clicks = 0;
+   // private int zeit = 0;
+   // private long startTime = 0;         // wird für timer benötigt
+   // private long endTime = 0;
+    //private long duration = 0;
 
 
-    private long startTime = 0;         // wird für timer benötigt
-    private long endTime = 0;
-    private long duration = 0;
-
-
-    public Welt() {
+    public Welt()  {
         { // intitialisierung
             random = new Random();    // neues Random
             level = new Level[width][height];
             // Level wird mit den dems von width und height gezeichnet
             for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
                 for (int y = 0; y < height; y++) {
-                    level[x][y] = new Level(x, y, normal, bomb, pressed, flag,eins,zwei,drei,vier,fuenf,sechs,sieben,acht); // jedes tile soll ein neues Tile sein mit .. x/y koordinate
+                    BufferedImage bomb = Imageloader.scale(Imageloader.loadImage("pics/bombe.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage flag = Imageloader.scale(Imageloader.loadImage("pics/Flaggenfeld.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage normal = Imageloader.scale(Imageloader.loadImage("pics/Feld.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage pressed = Imageloader.scale(Imageloader.loadImage("pics/gedrueckt.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage eins = Imageloader.scale(Imageloader.loadImage("pics/1.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage zwei = Imageloader.scale(Imageloader.loadImage("pics/2.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage drei = Imageloader.scale(Imageloader.loadImage("pics/3.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage vier = Imageloader.scale(Imageloader.loadImage("pics/4.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage fuenf = Imageloader.scale(Imageloader.loadImage("pics/5.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage sechs = Imageloader.scale(Imageloader.loadImage("pics/6.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage sieben = Imageloader.scale(Imageloader.loadImage("pics/7.jpg"), Level.getWidth(), Level.getHeight());
+                    BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
+                    level[x][y] = new Level(x, y, normal, bomb, pressed, flag, eins, zwei, drei, vier, fuenf, sechs, sieben, acht); // jedes tile soll ein neues Tile sein mit .. x/y koordinate
                     // und obs normal ist oder bombe,pressed oder flag oder ne zahl
                     level[x][y].setNormal(normal);      // automatisch auf normal gezeichnet
                 }
             }
             placeBombs(); //Aufruf von placebombs welches die methode placebomb aufruft
             setNumbers();
-            getStartTime();
+           // getStartTime();
         }
-        reset();
+        //reset();
     }
 
     private void placeBombs() {
-        for (int i = 0; i < AmountOfBombs; i++) {
+        int amountOfBombs = 40;
+        for (int i = 0; i < amountOfBombs; i++) {
             placeBomb();
         }
     }
@@ -64,7 +63,7 @@ public class Welt  {
         int y = random.nextInt(height);
 
         if (!level[x][y].isBomb()) {         //Abfrage ob Bombe oder nicht, wenn keine Bombe
-            level[x][y].setBomb(true);
+            level[x][y].setBomb();
 
         } else placeBomb();               //ansonsten erneuter aufruf
     }
@@ -104,7 +103,7 @@ public class Welt  {
                 int tileY = y / Level.getHeight();
 
                 if (!level[tileX][tileY].isFlag()) {
-                    level[tileX][tileY].setOpened(true);
+                    level[tileX][tileY].setOpened();
 
 
                     if (level[tileX][tileY].isBomb()) dead = true;
@@ -132,7 +131,7 @@ public class Welt  {
     }
 
     private void open(int x, int y) {
-        level[x][y].setOpened(true);
+        level[x][y].setOpened();
         if (level[x][y].getAmountOfNearBombs() == 0) {
 
 
@@ -174,13 +173,24 @@ public class Welt  {
             }
         }
         if (dead) {
+            Klang.HINTERGRUND.gestoppt();
+            Klang.TOT.play(40);
+
             g.setColor(Color.red);
             g.drawString("you loose\n", 200, 300);
-            g.drawString("Zeit:"+getDuration(),200,400);
+            Uhr clock = new Uhr();
+            clock.stop();
+            if (clock.stop){
+                System.out.println("Zeit"+ Uhr.getN()); // da passt noch was nicht
+            }
+            //g.drawString("Zeit:"+getDuration(),200,400);   // Brauchen wir jetzt nicht mehr, da wir nen Timer haben
         } else if (finish) {
+
+            Klang.HINTERGRUND.gestoppt();
+            Klang.HURRA.play(40);
             g.setColor(Color.red);
             g.drawString("you won\n", 200, 300);
-            g.drawString("Zeit:"+getDuration(),200,400);
+           // g.drawString("Zeit:"+getDuration(),200,400);
         }
     }
     public void reset()
@@ -192,15 +202,17 @@ public class Welt  {
                 level[x] [y].reset();
             }
         }
-
+        Klang.HINTERGRUND.playloop();
         dead = false;
         finish = false;
+        Uhr clock = new Uhr();
+        clock.start();
 
         placeBombs();
         setNumbers();
-        getStartTime();
+        //getStartTime();
     }
-    public final long getDuration() {          // Timermethode
+  /*  public final long getDuration() {          // Timermethode
         long start = getStartTime();
         long ende = getEndTime();
         long duration =  ((ende - start)/1000);
@@ -213,9 +225,7 @@ public class Welt  {
     public long getEndTime() {
         long endTime = System.nanoTime();
         return endTime;
-    }
-
-
+    }*/
 
 
     public static int getWidth() {

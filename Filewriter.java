@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 /**
- * Created by perdu on 14.06.16.
+ * Created by ${perdu} on ${16.06.16}.
  */
 public class Filewriter {
 

@@ -3,23 +3,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class Level {
+public class Level extends Thread {
 
     private JTable table1;
     //aka Tile
     //private BufferedImage image; // Initialisierung des Bufferedimages
     private BufferedImage normal;
     private BufferedImage openedImage; // zum öffnen der Kacheln
-    private BufferedImage flagImage;
-    private BufferedImage bombImage;
-    private BufferedImage einsImage;
-    private BufferedImage zweiImage;
-    private BufferedImage dreiImage;
-    private BufferedImage vierImage;
-    private BufferedImage fuenfImage;
-    private BufferedImage sechsImage;
-    private BufferedImage siebenImage;
-    private BufferedImage achtImage;
+    private final BufferedImage flagImage;
+    private final BufferedImage bombImage;
+    private final BufferedImage einsImage;
+    private final BufferedImage zweiImage;
+    private final BufferedImage dreiImage;
+    private final BufferedImage vierImage;
+    private final BufferedImage fuenfImage;
+    private final BufferedImage sechsImage;
+    private final BufferedImage siebenImage;
+    private final BufferedImage achtImage;
     private int i;
     private int x; // wohin die Kachel gemalt werden soll
     private int y;
@@ -56,6 +56,12 @@ public class Level {
         //opened = true;
     }
 
+
+    public void start(){
+    run ();
+    }
+
+
     public void setNormal(BufferedImage normal) {       // setter für normalimage
         this.normal = normal;
     }
@@ -68,15 +74,15 @@ public class Level {
         return opened;
     }
 
-    public void setOpened(boolean opened) {
-        this.opened = opened;
+    public void setOpened() {
+        this.opened = true;
     }
   /* public void setImage(BufferedImage image) {     //setzen des Images
         this.image = image;
     }*/
 
-    public void setBomb(boolean bomb) {         //settermethode für Bomb
-        this.bomb = bomb;
+    public void setBomb() {         //settermethode für Bomb
+        this.bomb = true;
     }
 
 
@@ -114,6 +120,16 @@ public class Level {
         return !opened&&!bomb&&amountOfNearBombs >= 0;
     }
 
+    public void run(){
+        try
+    {
+        sleep(50);
+    }
+
+    catch(InterruptedException ie)
+    {
+        // ...
+    }}
 
     public void draw(Graphics g) {  // um etwas in der Kachel zu malen
 
@@ -160,7 +176,6 @@ public class Level {
         // g.setColor(Color.red); // farbe auf Rot setzen
         // g.fillRect(x*width,y*height,width,height); // positionen der Kacheln
     }
-
     public static int getWidth() {
         return width;
     }

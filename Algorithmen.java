@@ -52,7 +52,17 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
 
     @Override
     public void mouseReleased(MouseEvent e) { // wenn die maus losgelassen haben nach klick
-        counter =  e.getClickCount() ;
+        counter ++;
+        int b;
+        b = counter;
+
+            if (b == 1){
+                welt.reset();
+              screen.repaint();
+            }
+
+
+
         if(e.getButton()==1) welt.clickedLeft(e.getX()-insetLeft,e.getY()-insetTop);// wo geklickt wurde diese koords werden übergeben
         if(e.getButton() == 3) welt.clickedRight(e.getX() - insetLeft, e.getY() - insetTop);
 
@@ -115,7 +125,4 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
         return height;
     }
 
-    public int getCounter() {
-        return counter;
-    }
 }
