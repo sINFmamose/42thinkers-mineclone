@@ -19,7 +19,7 @@ public enum Klang  {
     HURRA ("sounds/Hurra.wav"),//Applaus fürs geschaffte level
     INTRO ("sounds/Lalalalalala.wav"), // der nervige Startsound :)
     TOT ("sounds/Tot.wav"),// der Sound wird gespielt wenn die Bombe explodiert
-    HINTERGRUND ("sounds/Background.wav"); //Hintergrund
+    HINTERGRUND ("sounds/background.wav"); //Hintergrund
 
     private static final int MAX_VOLUME = 64;
 
