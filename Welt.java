@@ -13,16 +13,18 @@ public class Welt {
     private boolean dead;
     private final Random random;      // Initialisierung eines neuen Random objekts
     private final Level[][] level; // 2 dim level array
+    private boolean bombe;
    // private int clicks = 0;
    // private int zeit = 0;
    // private long startTime = 0;         // wird für timer benötigt
    // private long endTime = 0;
     //private long duration = 0;
-
+   private Uhr uhr2 = new Uhr();
 
     public Welt()  {
         { // intitialisierung
             random = new Random();    // neues Random
+            uhr2.setVisible(false);
             level = new Level[width][height];
             // Level wird mit den dems von width und height gezeichnet
             for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
@@ -48,7 +50,7 @@ public class Welt {
             setNumbers();
            // getStartTime();
         }
-        //reset();
+        reset();
     }
 
     private void placeBombs() {
@@ -66,6 +68,17 @@ public class Welt {
             level[x][y].setBomb();
 
         } else placeBomb();               //ansonsten erneuter aufruf
+    }
+
+
+    public boolean isBombe(int x, int y) {
+        int tileX = x / Level.getWidth();      // Welche Kachelposi
+        int tileY = y / Level.getHeight();
+
+        if (level[tileX][tileY].isBomb()){
+
+            return true;}
+        return true;
     }
 
     private void setNumbers() { // methode um die Zahlen die gezeichnet werden zu setzen
@@ -166,6 +179,7 @@ public class Welt {
         }
     }
 
+
     public void draw(Graphics g) {  // um etwas in der Welt zu malen
         for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
             for (int y = 0; y < height; y++) {
@@ -173,16 +187,17 @@ public class Welt {
             }
         }
         if (dead) {
-            Klang.HINTERGRUND.gestoppt();
+           Klang.HINTERGRUND.gestoppt();
             Klang.TOT.play(40);
 
             g.setColor(Color.red);
             g.drawString("you loose\n", 200, 300);
-            Uhr clock = new Uhr();
-            clock.stop();
-            if (clock.stop){
-                System.out.println("Zeit"+ Uhr.getN()); // da passt noch was nicht
+
+            uhr2.stop();
+            if (uhr2.stop){
+                System.out.println("Zeit"+ uhr2.getCl()); // da passt noch was nicht
             }
+
             //g.drawString("Zeit:"+getDuration(),200,400);   // Brauchen wir jetzt nicht mehr, da wir nen Timer haben
         } else if (finish) {
 
@@ -191,8 +206,15 @@ public class Welt {
             g.setColor(Color.red);
             g.drawString("you won\n", 200, 300);
            // g.drawString("Zeit:"+getDuration(),200,400);
+
         }
+
     }
+
+    public boolean isDead() {
+        return dead;
+    }
+
     public void reset()
     {
         for(int x = 0;x < width;x++)
@@ -202,14 +224,17 @@ public class Welt {
                 level[x] [y].reset();
             }
         }
-        Klang.HINTERGRUND.playloop();
+        Klang.TOT.gestoppt();
+        Klang.HURRA.gestoppt();
+        Klang.HINTERGRUND.gestoppt();
+
         dead = false;
         finish = false;
-        Uhr clock = new Uhr();
-        clock.start();
 
         placeBombs();
         setNumbers();
+       Klang.HINTERGRUND.playloop();
+
         //getStartTime();
     }
   /*  public final long getDuration() {          // Timermethode
@@ -234,6 +259,11 @@ public class Welt {
 
     public static int getHeight() {
         return height;
+    }
+
+
+    public void restart(){
+        main main = new main();
     }
 }
 

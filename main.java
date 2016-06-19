@@ -34,8 +34,8 @@ public class main extends Application implements ActionListener {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Startbildschirm.fxml"));
-        Parent view = (Parent) fxmlLoader.load();
-        Controller controller = fxmlLoader.<Controller>getController();
+        Parent view = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
         controller.setStage(primaryStage);
 
         primaryStage.setTitle("Algorithmen");
@@ -60,7 +60,7 @@ public class main extends Application implements ActionListener {
             try {
 // generate login controller from FXML;
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Algorithmen.fxml"));
-                Parent view = (Parent) fxmlLoader.load();
+                Parent view = fxmlLoader.load();
                 stage.setScene(new Scene(view));
                 stage.show();
             } catch (Exception e) {

@@ -16,11 +16,12 @@ import java.text.NumberFormat;
     private final ClockListener cl = new ClockListener();  //Intitalisierung eines Clocklistener Objects
     private final Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
     private final JTextField tf = new JTextField(5);     // 5 hat das feld
-
+    public boolean restart;
     public boolean stop;
     public boolean start;
     public String X;
     int integer = 0;
+
 
     public void start() {
         t.start();
@@ -30,6 +31,12 @@ import java.text.NumberFormat;
     public void stop() {
                t.stop();
         stop = true;
+    }
+    public void restart() {
+        t.stop();
+        System.out.println("44");
+        t.start();
+        restart = true;
     }
 
 
@@ -68,9 +75,6 @@ import java.text.NumberFormat;
         }
     }
 
-    public static int getN() {
-        return N;
-    }
 
     public void setStart(boolean start) {
         this.start = start;
@@ -88,6 +92,14 @@ import java.text.NumberFormat;
         return start;
     }
 
+    public boolean isRestart() {
+        return restart;
+    }
+
+    public void setRestart(boolean restart) {
+        this.restart = restart;
+    }
+
     public Timer getT() {       // da der start immer bei 0 ist :)
         return t;
     }
@@ -96,6 +108,9 @@ import java.text.NumberFormat;
         return tf;
     }
 
+    public ClockListener getCl() {
+        return cl;
+    }
 
     public Uhr() {          // innere Klasse
         t.setInitialDelay(0);

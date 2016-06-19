@@ -16,6 +16,7 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
     private int insetLeft; // wegen den rändern klickt man ansonsten nicht richtig
     private int insetTop;
     private int counter;
+    private Uhr uhr2 = new Uhr();
 
 
     public Algorithmen (){
@@ -35,13 +36,21 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
         setLocationRelativeTo(null); // in welcher relation die Location steht
         setVisible(true); // Fenster soll sichtbar sein
         font=new Font("SansSerif",0,50);    // Mit welcher Schriftart gezeichnet wird ( nicht fett und grösse soll 12 sein)
-
+        uhr2.setVisible(false);
     }
 
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        counter ++;
+        int b;
+        b = counter;
+
+        if ((b == 1)&&(welt.isBombe((e.getX()-insetLeft),(e.getY()-insetTop)))){
+            welt.reset();
+            screen.repaint();
+        }
 
     }
 
@@ -52,14 +61,6 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
 
     @Override
     public void mouseReleased(MouseEvent e) { // wenn die maus losgelassen haben nach klick
-        counter ++;
-        int b;
-        b = counter;
-
-            if (b == 1){
-                welt.reset();
-              screen.repaint();
-            }
 
 
 
@@ -89,16 +90,23 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
     @Override
     public void keyPressed(KeyEvent e) {
 
-    }
+        if (welt.isDead() && (e.getKeyCode() == KeyEvent.VK_ENTER)) {
+            System.out.println("43");
+            welt.restart();
+            uhr2.restart();
+        }
 
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            welt.reset();
+            screen.repaint();
+            System.out.println("42");
+            uhr2.restart();
+        }
+    }
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-        {
-            welt.reset();
-            screen.repaint();
-        }
 
     }
 
