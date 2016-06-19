@@ -6,13 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
+
 
 
 /**
  * Created by ${perdu} on ${16.06.16}.
  */
-public class main extends Application implements ActionListener {
+public class main extends Application  {
 
 
 
@@ -43,10 +43,7 @@ public class main extends Application implements ActionListener {
         primaryStage.show();
     }
 
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
 
-    }
 
     public class Controller {
         // reference to (primary) stage; required to move on to next view

@@ -27,7 +27,7 @@ public enum Klang  {
 
     // Konstruktor um jedes Element des Enums zu bilden
 
-     Klang (String soundFileName) {
+    Klang(String soundFileName) {
         try {
             URL url = this.getClass().getClassLoader().getResource(soundFileName);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
@@ -43,7 +43,7 @@ public enum Klang  {
     }
 
 /**
- * play or re-play sound effect from beginning
+ * play oder re-play sound effect von Anfang an
  *
  *
  * @return void
@@ -57,7 +57,7 @@ public enum Klang  {
             clip.start();
         }
         /**
-         * Sets the volume.
+         * Lautstärkeregelung
          *
          * @param vol the volume
          */
@@ -81,7 +81,7 @@ public enum Klang  {
     }
 
     /**
-     * plays the clip indefinitely
+     * loopt den Clip
      *
      * @param
      * @return void
@@ -96,7 +96,7 @@ public enum Klang  {
         }
 
     /**
-     * plays the clip indefinitely
+     * stoppt den Clip
      *
      * @param
      * @return void
@@ -104,7 +104,7 @@ public enum Klang  {
 
     public void gestoppt() {
         {
-            if (clip.isRunning())
+          //  if (clip.isRunning())
                 clip.stop();}
         }
 

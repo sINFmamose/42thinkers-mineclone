@@ -14,6 +14,7 @@ public class Welt {
     private final Random random;      // Initialisierung eines neuen Random objekts
     private final Level[][] level; // 2 dim level array
     private boolean bombe;
+    private boolean offen;
    // private int clicks = 0;
    // private int zeit = 0;
    // private long startTime = 0;         // wird für timer benötigt
@@ -71,15 +72,18 @@ public class Welt {
     }
 
 
-    public boolean isBombe(int x, int y) {
+    public boolean isBombe(int x, int y) {      // Methode zum abfragen ob erster Klick bombe
         int tileX = x / Level.getWidth();      // Welche Kachelposi
         int tileY = y / Level.getHeight();
 
         if (level[tileX][tileY].isBomb()){
 
+
             return true;}
         return true;
     }
+
+
 
     private void setNumbers() { // methode um die Zahlen die gezeichnet werden zu setzen
         for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
@@ -142,8 +146,14 @@ public class Welt {
             checkFinish();
         }
     }
+    public boolean nichtoeffnen(int x, int y){
+       if (level[x][y].canOpen()){
+            return false;
+        }
+        return false;
+    }
 
-    private void open(int x, int y) {
+    public void open(int x, int y) {
         level[x][y].setOpened();
         if (level[x][y].getAmountOfNearBombs() == 0) {
 

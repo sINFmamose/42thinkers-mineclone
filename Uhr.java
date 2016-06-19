@@ -14,34 +14,39 @@ import java.text.NumberFormat;
 
     private static final int N = 60;
     private final ClockListener cl = new ClockListener();  //Intitalisierung eines Clocklistener Objects
-    private final Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
+   public  Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
     private final JTextField tf = new JTextField(5);     // 5 hat das feld
     public boolean restart;
     public boolean stop;
     public boolean start;
+    public boolean isRunning;
     public String X;
     int integer = 0;
-
-
     public void start() {
         t.start();
         start = true;
     }
 
     public void stop() {
-               t.stop();
+        t.stop();
+        tf.getText();
         stop = true;
     }
     public void restart() {
         t.stop();
         System.out.println("44");
+        t = new Timer(1000,cl);
         t.start();
         restart = true;
     }
 
+    public boolean isRunning(){
+        return isRunning;
+    }
 
 
     private class ClockListener implements ActionListener {     // ein Clocklistener der einen Actionlistener hat
+
 
 
         private int minutes;
@@ -69,6 +74,13 @@ import java.text.NumberFormat;
             tf.setText(String.valueOf(minute + ":" + second));
             seconds++;
 
+            if (stop) {minute = formatter.format(minutes);
+                second = formatter.format(seconds);
+                tf.setText(String.valueOf(minute + ":" + second));
+            }
+            if (restart){
+
+            }
 
 
 
@@ -120,7 +132,7 @@ import java.text.NumberFormat;
         tf.setEditable(false);
         panel.add(tf);
         this.setSize(30,220);
-
+        setResizable(false);
         this.getContentPane().setLayout(new java.awt.FlowLayout());
         this.getContentPane().add(tf);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

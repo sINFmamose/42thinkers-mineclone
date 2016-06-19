@@ -36,6 +36,7 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
         setLocationRelativeTo(null); // in welcher relation die Location steht
         setVisible(true); // Fenster soll sichtbar sein
         font=new Font("SansSerif",0,50);    // Mit welcher Schriftart gezeichnet wird ( nicht fett und grösse soll 12 sein)
+
         uhr2.setVisible(false);
     }
 
@@ -48,6 +49,7 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
         b = counter;
 
         if ((b == 1)&&(welt.isBombe((e.getX()-insetLeft),(e.getY()-insetTop)))){
+           welt.nichtoeffnen((e.getX()-insetLeft),(e.getY()-insetTop));
             welt.reset();
             screen.repaint();
         }
