@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class Level extends Thread {
+public class Level  {
 
     private JTable table1;
     //aka Tile
@@ -55,12 +55,6 @@ public class Level extends Thread {
 
         //opened = true;
     }
-
-
-    public void start(){
-    run ();
-    }
-
 
     public void setNormal(BufferedImage normal) {       // setter für normalimage
         this.normal = normal;
@@ -120,16 +114,6 @@ public class Level extends Thread {
         return !opened&&!bomb&&amountOfNearBombs >= 0;
     }
 
-    public void run(){
-        try
-    {
-        sleep(50);
-    }
-
-    catch(InterruptedException ie)
-    {
-        // ...
-    }}
 
     public void draw(Graphics g) {  // um etwas in der Kachel zu malen
 

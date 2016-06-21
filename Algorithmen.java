@@ -16,12 +16,13 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
     private int insetLeft; // wegen den rändern klickt man ansonsten nicht richtig
     private int insetTop;
     private int counter;
-    private Uhr uhr2 = new Uhr();
 
 
     public Algorithmen (){
+
         super("Minesweeper"); //(Titelzeile)
         welt = new Welt() ;// neue Welt erzeugen
+
         setResizable(false); //Nicht veränderbar in der Grösse
         setDefaultCloseOperation(EXIT_ON_CLOSE); //Beenden beim X im rechten oberen eck
         addMouseListener(this); //  damit der Mouselistener überhaupt auf das Feld hört // Implementierung
@@ -37,22 +38,25 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
         setVisible(true); // Fenster soll sichtbar sein
         font=new Font("SansSerif",0,50);    // Mit welcher Schriftart gezeichnet wird ( nicht fett und grösse soll 12 sein)
 
-        uhr2.setVisible(false);
+
+
+        //uhr2.setVisible(false);
     }
 
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        counter ++;
+       /* counter ++;
         int b;
         b = counter;
 
+
         if ((b == 1)&&(welt.isBombe((e.getX()-insetLeft),(e.getY()-insetTop)))){
-           welt.nichtoeffnen((e.getX()-insetLeft),(e.getY()-insetTop));
+       //  welt.nichtoeffnen((e.getX()-insetLeft),(e.getY()-insetTop));
             welt.reset();
             screen.repaint();
-        }
+        }*/
 
     }
 
@@ -93,17 +97,15 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
     public void keyPressed(KeyEvent e) {
 
         if (welt.isDead() && (e.getKeyCode() == KeyEvent.VK_ENTER)) {
-            System.out.println("43");
-            welt.restart();
-            uhr2.restart();
+             welt.restart();
+            Uhr.getRefrence().restart();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
             welt.reset();
             screen.repaint();
-            System.out.println("42");
-            uhr2.restart();
+            Uhr.getRefrence().restart();
         }
     }
     @Override

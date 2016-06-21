@@ -11,7 +11,7 @@ import java.text.NumberFormat;
  */
  public class Uhr extends JFrame {
 
-
+    private static final Uhr refrence = new Uhr();
     private static final int N = 60;
     private final ClockListener cl = new ClockListener();  //Intitalisierung eines Clocklistener Objects
    public  Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
@@ -22,6 +22,27 @@ import java.text.NumberFormat;
     public boolean isRunning;
     public String X;
     int integer = 0;
+    private Uhr(){
+        t.setInitialDelay(0);
+
+        JPanel panel = new JPanel();
+        tf.setHorizontalAlignment(JTextField.RIGHT);
+        tf.setEditable(false);
+        panel.add(tf);
+        this.setSize(30,220);
+        setResizable(false);
+        this.getContentPane().setLayout(new java.awt.FlowLayout());
+        this.getContentPane().add(tf);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(panel);
+        this.pack();
+        this.setLocation(1400,600);
+        this.setVisible(true);
+
+    }
+    public static Uhr getRefrence(){
+        return refrence;
+    }
     public void start() {
         t.start();
         start = true;
@@ -124,24 +145,7 @@ import java.text.NumberFormat;
         return cl;
     }
 
-    public Uhr() {          // innere Klasse
-        t.setInitialDelay(0);
 
-        JPanel panel = new JPanel();
-        tf.setHorizontalAlignment(JTextField.RIGHT);
-        tf.setEditable(false);
-        panel.add(tf);
-        this.setSize(30,220);
-        setResizable(false);
-        this.getContentPane().setLayout(new java.awt.FlowLayout());
-        this.getContentPane().add(tf);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(panel);
-        this.pack();
-        this.setLocation(1400,600);
-        this.setVisible(true);
-
-    }
 }
 
 

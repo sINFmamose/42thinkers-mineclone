@@ -20,12 +20,11 @@ public class Welt {
    // private long startTime = 0;         // wird für timer benötigt
    // private long endTime = 0;
     //private long duration = 0;
-   private Uhr uhr2 = new Uhr();
+   private Uhr uhr2;
 
     public Welt()  {
         { // intitialisierung
             random = new Random();    // neues Random
-            uhr2.setVisible(false);
             level = new Level[width][height];
             // Level wird mit den dems von width und height gezeichnet
             for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
@@ -42,20 +41,21 @@ public class Welt {
                     BufferedImage sechs = Imageloader.scale(Imageloader.loadImage("pics/6.jpg"), Level.getWidth(), Level.getHeight());
                     BufferedImage sieben = Imageloader.scale(Imageloader.loadImage("pics/7.jpg"), Level.getWidth(), Level.getHeight());
                     BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
-                    level[x][y] = new Level(x, y, normal, bomb, pressed, flag, eins, zwei, drei, vier, fuenf, sechs, sieben, acht); // jedes tile soll ein neues Tile sein mit .. x/y koordinate
+                    level[x][y] = new Level(x, y, normal, bomb, pressed, flag, eins, zwei, drei, vier, fuenf, sechs, sieben, acht);
+                    // jedes tile soll ein neues Tile sein mit .. x/y koordinate
                     // und obs normal ist oder bombe,pressed oder flag oder ne zahl
                     level[x][y].setNormal(normal);      // automatisch auf normal gezeichnet
                 }
             }
             placeBombs(); //Aufruf von placebombs welches die methode placebomb aufruft
             setNumbers();
-           // getStartTime();
+            Uhr.getRefrence().start();
         }
         reset();
     }
 
     private void placeBombs() {
-        int amountOfBombs = 40;
+        int amountOfBombs = 10;
         for (int i = 0; i < amountOfBombs; i++) {
             placeBomb();
         }
@@ -72,7 +72,7 @@ public class Welt {
     }
 
 
-    public boolean isBombe(int x, int y) {      // Methode zum abfragen ob erster Klick bombe
+  /* public boolean isBombe(int x, int y) {      // Methode zum abfragen ob erster Klick bombe
         int tileX = x / Level.getWidth();      // Welche Kachelposi
         int tileY = y / Level.getHeight();
 
@@ -82,7 +82,7 @@ public class Welt {
             return true;}
         return true;
     }
-
+*/
 
 
     private void setNumbers() { // methode um die Zahlen die gezeichnet werden zu setzen
@@ -146,12 +146,12 @@ public class Welt {
             checkFinish();
         }
     }
-    public boolean nichtoeffnen(int x, int y){
+  /* public boolean nichtoeffnen(int x, int y){
        if (level[x][y].canOpen()){
             return false;
         }
         return false;
-    }
+    }*/
 
     public void open(int x, int y) {
         level[x][y].setOpened();
@@ -178,6 +178,7 @@ public class Welt {
     }
 
     private void checkFinish() {
+        finish = true;
         outer:              // Sprungmarke
         for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
             for (int y = 0; y < height; y++) {
@@ -203,19 +204,23 @@ public class Welt {
             g.setColor(Color.red);
             g.drawString("you loose\n", 200, 300);
 
-            uhr2.stop();
-            if (uhr2.stop){
+            Uhr.getRefrence().stop();
+
+           /* if (uhr2.stop){
                 System.out.println("Zeit"+ uhr2.getCl()); // da passt noch was nicht
-            }
+            }*/
 
             //g.drawString("Zeit:"+getDuration(),200,400);   // Brauchen wir jetzt nicht mehr, da wir nen Timer haben
-        } else if (finish) {
+            }
+        else if (finish) {
 
             Klang.HINTERGRUND.gestoppt();
             Klang.HURRA.play(40);
             g.setColor(Color.red);
             g.drawString("you won\n", 200, 300);
-           // g.drawString("Zeit:"+getDuration(),200,400);
+            Uhr.getRefrence().stop();
+
+            // g.drawString("Zeit:"+getDuration(),200,400);
 
         }
 
@@ -224,6 +229,8 @@ public class Welt {
     public boolean isDead() {
         return dead;
     }
+
+
 
     public void reset()
     {

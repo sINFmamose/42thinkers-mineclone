@@ -19,15 +19,15 @@ public class main extends Application  {
     public static void main(String[] args) {
 
 
-        Algorithmen algorithmen = new Algorithmen();
-        //Startbildschirm startbildschirm = new Startbildschirm();
+       Algorithmen algorithmen = new Algorithmen();
+       //Startbildschirm startbildschirm = new Startbildschirm();
         // Hauptmenue hauptmenue = new Hauptmenue();
 
-        EventQueue.invokeLater(() -> {          //mit ner Lambda-expression ersetzt
+        /*EventQueue.invokeLater(() -> {          //mit ner Lambda-expression ersetzt
             Uhr clock = new Uhr();
             clock.start();
 
-        });
+        });*/
     }
 
 
