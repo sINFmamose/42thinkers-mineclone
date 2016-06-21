@@ -55,7 +55,7 @@ public class Welt {
     }
 
     private void placeBombs() {
-        int amountOfBombs = 10;
+        int amountOfBombs = 40;
         for (int i = 0; i < amountOfBombs; i++) {
             placeBomb();
         }
