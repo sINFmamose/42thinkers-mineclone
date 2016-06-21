@@ -16,6 +16,7 @@ public class Welt {
     private boolean bombe;
     private boolean offen;
     public int amountOfBombs = 40;
+    public Bombenzähler Bombenzähler;
     // private int clicks = 0;
    // private int zeit = 0;
    // private long startTime = 0;         // wird für timer benötigt
@@ -25,6 +26,7 @@ public class Welt {
 
     public Welt()  {
         { // intitialisierung
+
             random = new Random();    // neues Random
             level = new Level[width][height];  BufferedImage bomb = Imageloader.scale(Imageloader.loadImage("pics/bombe.jpg"), Level.getWidth(), Level.getHeight());
             BufferedImage flag = Imageloader.scale(Imageloader.loadImage("pics/Flaggenfeld.jpg"), Level.getWidth(), Level.getHeight());
@@ -51,6 +53,9 @@ public class Welt {
             placeBombs(); //Aufruf von placebombs welches die methode placebomb aufruft
             setNumbers();
             Uhr.getRefrence().start();
+            Bombenzähler.getRefrence().setCurrentBombs(amountOfBombs);
+
+
         }
         reset();
     }
@@ -142,6 +147,8 @@ public class Welt {
             int tileY = y / Level.getHeight();
 
             level[tileX][tileY].placeFlag();
+            Bombenzähler.getRefrence().BombenzahlVerringern();
+
 
             checkFinish();
         }

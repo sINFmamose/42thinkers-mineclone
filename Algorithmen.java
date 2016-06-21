@@ -69,9 +69,11 @@ public class Algorithmen extends JFrame implements MouseListener,KeyListener  { 
     public void mouseReleased(MouseEvent e) { // wenn die maus losgelassen haben nach klick
 
 
-
+        // 1 entspricht linke Maustaste
         if(e.getButton()==1) welt.clickedLeft(e.getX()-insetLeft,e.getY()-insetTop);// wo geklickt wurde diese koords werden übergeben
+        // 3 entspricht rechte Maustaste
         if(e.getButton() == 3) welt.clickedRight(e.getX() - insetLeft, e.getY() - insetTop);
+
 
         screen.repaint();  // der Screen soll neu gemalt werden
 
