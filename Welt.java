@@ -15,7 +15,8 @@ public class Welt {
     private final Level[][] level; // 2 dim level array
     private boolean bombe;
     private boolean offen;
-   // private int clicks = 0;
+    public int amountOfBombs = 40;
+    // private int clicks = 0;
    // private int zeit = 0;
    // private long startTime = 0;         // wird für timer benötigt
    // private long endTime = 0;
@@ -25,22 +26,22 @@ public class Welt {
     public Welt()  {
         { // intitialisierung
             random = new Random();    // neues Random
-            level = new Level[width][height];
+            level = new Level[width][height];  BufferedImage bomb = Imageloader.scale(Imageloader.loadImage("pics/bombe.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage flag = Imageloader.scale(Imageloader.loadImage("pics/Flaggenfeld.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage normal = Imageloader.scale(Imageloader.loadImage("pics/Feld.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage pressed = Imageloader.scale(Imageloader.loadImage("pics/gedrueckt.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage eins = Imageloader.scale(Imageloader.loadImage("pics/1.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage zwei = Imageloader.scale(Imageloader.loadImage("pics/2.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage drei = Imageloader.scale(Imageloader.loadImage("pics/3.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage vier = Imageloader.scale(Imageloader.loadImage("pics/4.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage fuenf = Imageloader.scale(Imageloader.loadImage("pics/5.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage sechs = Imageloader.scale(Imageloader.loadImage("pics/6.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage sieben = Imageloader.scale(Imageloader.loadImage("pics/7.jpg"), Level.getWidth(), Level.getHeight());
+            BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
+
             // Level wird mit den dems von width und height gezeichnet
             for (int x = 0; x < width; x++) { // wir gehen duch alle Tiles/level durch
                 for (int y = 0; y < height; y++) {
-                    BufferedImage bomb = Imageloader.scale(Imageloader.loadImage("pics/bombe.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage flag = Imageloader.scale(Imageloader.loadImage("pics/Flaggenfeld.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage normal = Imageloader.scale(Imageloader.loadImage("pics/Feld.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage pressed = Imageloader.scale(Imageloader.loadImage("pics/gedrueckt.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage eins = Imageloader.scale(Imageloader.loadImage("pics/1.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage zwei = Imageloader.scale(Imageloader.loadImage("pics/2.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage drei = Imageloader.scale(Imageloader.loadImage("pics/3.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage vier = Imageloader.scale(Imageloader.loadImage("pics/4.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage fuenf = Imageloader.scale(Imageloader.loadImage("pics/5.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage sechs = Imageloader.scale(Imageloader.loadImage("pics/6.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage sieben = Imageloader.scale(Imageloader.loadImage("pics/7.jpg"), Level.getWidth(), Level.getHeight());
-                    BufferedImage acht = Imageloader.scale(Imageloader.loadImage("pics/8.jpg"), Level.getWidth(), Level.getHeight());
                     level[x][y] = new Level(x, y, normal, bomb, pressed, flag, eins, zwei, drei, vier, fuenf, sechs, sieben, acht);
                     // jedes tile soll ein neues Tile sein mit .. x/y koordinate
                     // und obs normal ist oder bombe,pressed oder flag oder ne zahl
@@ -53,9 +54,8 @@ public class Welt {
         }
         reset();
     }
-
     private void placeBombs() {
-        int amountOfBombs = 40;
+
         for (int i = 0; i < amountOfBombs; i++) {
             placeBomb();
         }
@@ -269,6 +269,9 @@ public class Welt {
         return endTime;
     }*/
 
+    public int getAmountOfBombs() {
+        return amountOfBombs;
+    }
 
     public static int getWidth() {
         return width;

@@ -92,6 +92,7 @@ public class Level  {
             if (!opened) flag = true;
         }
     }
+
     public void reset(){
         flag = false;
         bomb = false;

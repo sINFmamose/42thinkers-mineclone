@@ -14,7 +14,7 @@ import java.text.NumberFormat;
     private static final Uhr refrence = new Uhr();
     private static final int N = 60;
     private final ClockListener cl = new ClockListener();  //Intitalisierung eines Clocklistener Objects
-   public  Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
+    public  Timer t = new Timer(1000, cl);  // 1000 wegen der Nanotime des Systems
     private final JTextField tf = new JTextField(5);     // 5 hat das feld
     public boolean restart;
     public boolean stop;
@@ -23,6 +23,7 @@ import java.text.NumberFormat;
     public String X;
     int integer = 0;
     private Uhr(){
+
         t.setInitialDelay(0);
 
         JPanel panel = new JPanel();
@@ -54,11 +55,12 @@ import java.text.NumberFormat;
         stop = true;
     }
     public void restart() {
+
         t.stop();
-        System.out.println("44");
         t = new Timer(1000,cl);
         t.start();
         restart = true;
+        cl.restartListener();
     }
 
     public boolean isRunning(){
@@ -99,15 +101,19 @@ import java.text.NumberFormat;
                 second = formatter.format(seconds);
                 tf.setText(String.valueOf(minute + ":" + second));
             }
-            if (restart){
 
-            }
 
 
 
         }
-    }
 
+        public void restartListener() {
+            this.seconds = 0;
+            this.minutes = 0;
+            this.second = "0";
+            this.minute = "0";
+        }
+    }
 
     public void setStart(boolean start) {
         this.start = start;
@@ -117,6 +123,10 @@ import java.text.NumberFormat;
         return stop;
     }
 
+   /* public int[] stopTimer(){
+        int[] result = new int[2];
+        result[0] = this.
+    }*/
     public void setStop(boolean stop) {
         this.stop = stop;}
 
