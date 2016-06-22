@@ -4,11 +4,12 @@ import java.io.*;
 /**
  * Created by ${perdu} on ${16.06.16}.
  */
+
 public class Highscore extends JFrame {
 
     private JPanel panel1;
 
-        public static void main(String[] args)throws IOException {
+        public Highscore()throws IOException {
             Reader reader = null;
 
             try {

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.JFrame;
 import java.awt.*;
+//bis auf Weiteres  auskommentiert... Klasse wird nicht benötigt!
+/**
 
 public class Bombenzähler {
     public JFrame Fenster;
@@ -40,3 +42,4 @@ public class Bombenzähler {
         return refrence;
     }
 }
+**/
