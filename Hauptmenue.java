@@ -18,6 +18,7 @@ import javax.swing.*;
 
 /**
  * Created by ${perdu} on ${16.06.16}.
+ * last modified by sINFmamose on ${04.07.16}
  */
 public class Hauptmenue  /*extends Application */{
     private GridLayout hauptmenuLayout;
@@ -42,22 +43,22 @@ public class Hauptmenue  /*extends Application */{
 
 
  public Hauptmenue(){
-       //weil das mit FX unverstänlicher Code wird, mit AWT... Entschluss gefasst am 4.07 um 21 uhr... nach erfolgreichem Erfahrungssammeln mit Jfx
+       //weil das mit FX für mich selbst unverstänlicher Code wird, mit AWT... Entschluss gefasst am 4.07.16 um 21 uhr... nach erfolgreichem Scheitern mit JavaFX
 
        //Erstellen eines awt-Fensters mit Raster-Layout 1 auf 6 für die Buttons
        JFrame Fenster = new JFrame("Menu");
        //damit das Kreuzchen das Fenster Schließt...
-       Fenster.setDefaultCloseOperation(3);
+       Fenster.setDefaultCloseOperation( 3 );
      //layout erzeugen...
        hauptmenuLayout = new GridLayout(6,1);
         Fenster.setLayout(hauptmenuLayout);
 
-       spielStartenButton = new JButton ("neues Spiel");
+       spielStartenButton = new JButton ("für neues Spiel: ENTER-Taste tippen");
        creditsButton = new JButton("credits");
        spielLadenButton = new JButton("Spiel laden(in Vorbereitung)");
        highscoreButton = new JButton ("Highscore (in Vorbereitung)");
        tutorialButton = new JButton ("Tutorial anzeigen");
-       spielBeendenButton = new JButton("Spiel Beenden");
+       spielBeendenButton = new JButton("Menü Schließen");
 
 
        //Buttons zum Fenster hinzufügen
@@ -69,7 +70,9 @@ public class Hauptmenue  /*extends Application */{
        Fenster.add(spielBeendenButton);
 
        // den Buttons ihre Aufgaben zuweisen...
-       //erstellen der Benötigten ActionListener... damit beim Knöpfedrücken auch was passiert ;)
+
+
+       //Schritt 1 von 2: erstellen der Benötigten ActionListener... damit beim Knöpfedrücken auch was passiert ;)
        ActionListener creditsListener = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -81,7 +84,7 @@ public class Hauptmenue  /*extends Application */{
                        " Lead Progammmer: Georg Goldes \n" +
                        "advanced GUI creator: zdravko Buljan\n"+
                        "Lead Tester: Eduardo Alezard Ostermann\n"+
-                        "alpha GUI creator: Markus Moses");
+                       "alpha GUI creator(who didn't get the advanced GUI to work...): Markus Moses");
                CreditsFenster.setLayout(new GridLayout(1,1));
                CreditsFenster.add(CreditsText);
                CreditsFenster.pack();
@@ -143,52 +146,14 @@ public class Hauptmenue  /*extends Application */{
        ActionListener spielStartListener = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
+               /*
+               *@TODO: zum laufen Bringen... also ein neues Spiel aufrufen, irgenwdwie...
+               * vorerst umgangen mit Aufforderung and den Spieler via Text. nicht schön aber besser als nichts...
+               */
 
-               //nicht edel oder schön, sollte aber hoffentlich irgendwie gehen... die alte main-class Kopiert...
-
-               /*@TODO: zum laufen Bringen... also ein neues Spiel aufrfen, irgenwdwie...
-               *
-                */
-                class run extends Application{
-                   Algorithmen algorithmen = new Algorithmen();
-                   @Override
-                   public void start(Stage primaryStage) throws Exception {
-                       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Startbildschirm.fxml"));
-                       Parent view = fxmlLoader.load();
-                       run.Controller controller = fxmlLoader.getController();
-                       controller.setStage(primaryStage);
-
-                       primaryStage.setTitle("Algorithmen");
-                       primaryStage.setScene(new Scene(view));
-                       primaryStage.show();
-                   }
-
-
-
-                    class Controller {
-                       // reference to (primary) stage; required to move on to next view
-                       private Stage stage;
-
-                       public void setStage(Stage stage) {
-                           this.stage = stage;
-                       }
-
-                       public void reactToButtonClick(javafx.event.ActionEvent actionEvent) {
-                           try {
-// generate login controller from FXML;
-                               FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Algorithmen.fxml"));
-                               Parent view = fxmlLoader.load();
-                               stage.setScene(new Scene(view));
-                               stage.show();
-                           } catch (Exception e) {
-                               e.printStackTrace();
-                           }
-                       }
-                   }
                }
-               run laufen = new run();
 
-           }
+
        };
 
      ActionListener EndeListener = new ActionListener() {
@@ -200,7 +165,7 @@ public class Hauptmenue  /*extends Application */{
      };
 
 
-       // den Buttons die Jeweiligen ActionListener zuweisen. poc...
+       // Schritt 2 von 2: den Buttons die Jeweiligen ActionListener zuweisen. poc...
 
        creditsButton.addActionListener(creditsListener);
        spielLadenButton.addActionListener(notWorkingYetListener);
