@@ -12,16 +12,16 @@ import java.awt.*;
 /**
  * Created by ${perdu} on ${16.06.16}.
  */
-public class main extends Application  {
+public class main /*extends Application */ {
 
 
 
     public static void main(String[] args) {
 
 
-       Algorithmen algorithmen = new Algorithmen();
+       //Algorithmen algorithmen = new Algorithmen();
        //Startbildschirm startbildschirm = new Startbildschirm();
-        // Hauptmenue hauptmenue = new Hauptmenue();
+         Hauptmenue hauptmenue = new Hauptmenue();
 
         /*EventQueue.invokeLater(() -> {          //mit ner Lambda-expression ersetzt
             Uhr clock = new Uhr();
@@ -30,7 +30,7 @@ public class main extends Application  {
         });*/
     }
 
-
+/*
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Startbildschirm.fxml"));
@@ -44,7 +44,7 @@ public class main extends Application  {
     }
 
 
-
+*/
     public class Controller {
         // reference to (primary) stage; required to move on to next view
         private Stage stage;
